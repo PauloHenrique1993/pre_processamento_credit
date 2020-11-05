@@ -32,3 +32,30 @@ pd.isnull(base['age'])
 
 #metodo que traz as linhas que não foram preenchidas
 base.loc[pd.isnull(base['age'])]
+
+previsores = base.iloc[:, 1:4].values
+classe = base.iloc[:, 4].values
+
+# Importando a lib SimpleImputer
+from sklearn.impute import SimpleImputer
+
+# Alterando todos os dados que estão como 'NaN' e colocando a média
+imputer = SimpleImputer(missing_values=np.nan, strategy='mean')
+
+# Treinando os dados
+imputer = imputer.fit(previsores[:, 0:3])
+
+previsores[:, 0:3] = imputer.transform(previsores[:,0:3])
+
+# O StandardScaler é utilizado para padronizar a base de dados removendo as médias e escalonando para a variação da unidade
+# importando a lib
+from sklearn.preprocessing import StandardScaler
+
+# Não é necessária passar parametros para a função StandardScaler(), bastando apenas chama-la
+scaler = StandardScaler()
+
+# Ajustando os dados e transformando-os
+previsores = scaler.fit_transform(previsores)
+
+previsores
+
