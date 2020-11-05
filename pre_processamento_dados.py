@@ -39,7 +39,7 @@ classe = base.iloc[:, 4].values
 # Importando a lib SimpleImputer
 from sklearn.impute import SimpleImputer
 
-# Alterando todos os dados que estão como 'NaN' e colocando a média
+# Alterando os dados que estão como 'NaN' e colocando a média
 imputer = SimpleImputer(missing_values=np.nan, strategy='mean')
 
 # Treinando os dados
@@ -56,6 +56,3 @@ scaler = StandardScaler()
 
 # Ajustando os dados e transformando-os
 previsores = scaler.fit_transform(previsores)
-
-previsores
-
